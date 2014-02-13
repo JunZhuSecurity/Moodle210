@@ -144,7 +144,7 @@ if (has_capability('mod/chat:chat', $context)) {
     echo $OUTPUT->action_link($link, get_string('noframesjs', 'message'), $action, array('title'=>get_string('modulename', 'chat')));
     echo '</p>';
 
-    if ($chat->studentlogs or has_capability('mod/chat:readlog', $context)) {
+    if (has_capability('mod/chat:readlog', $context)) {   //My fix for Moodle vulnerability MDL-44146, "$chat->studentlogs or" is removed.
         if ($msg = $DB->get_records_select('chat_messages', "chatid = ? $groupselect", array($chat->id))) {
             echo '<p>';
             echo html_writer::link(new moodle_url('/mod/chat/report.php', array('id'=>$cm->id)), get_string('viewreport', 'chat'));

@@ -46,7 +46,7 @@
         notice(get_string('nopermissiontoseethechatlog', 'chat'));
     } */
     
-    if (!has_capability('mod/chat:readlog', $context)) { //fix for Moodle vulnerability MDL
+    if (!has_capability('mod/chat:readlog', $context)) { //fix for Moodle vulnerability MDL-44144
     	notice(get_string('nopermissiontoseethechatlog', 'chat'));
     }
     
