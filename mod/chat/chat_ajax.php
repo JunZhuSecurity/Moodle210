@@ -47,6 +47,10 @@ if (!$cm = get_coursemodule_from_instance('chat', $chat->id, $course->id)) {
 if (!isloggedin()) {
     throw new moodle_exception('notlogged', 'chat');
 }
+//the following two lines are the fix for Moodle vulnerability MDL 44082, this path is to help the Moodle team to fix their code.
+$context = get_context_instance(CONTEXT_MODULE, $cm->id);
+require_capability('mod/chat:chat', $context);  
+
 
 // setup $PAGE so that format_text will work properly
 $PAGE->set_cm($cm, $course, $chat);
