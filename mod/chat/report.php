@@ -42,10 +42,14 @@
 
     require_login($course->id, false, $cm);
 
-    if (empty($chat->studentlogs) && !has_capability('mod/chat:readlog', $context)) {
+   /*  if (empty($chat->studentlogs) && !has_capability('mod/chat:readlog', $context)) {
         notice(get_string('nopermissiontoseethechatlog', 'chat'));
+    } */
+    
+    if (!has_capability('mod/chat:readlog', $context)) { //fix for Moodle vulnerability MDL
+    	notice(get_string('nopermissiontoseethechatlog', 'chat'));
     }
-
+    
     add_to_log($course->id, 'chat', 'report', "report.php?id=$cm->id", $chat->id, $cm->id);
 
     $strchats         = get_string('modulenameplural', 'chat');
